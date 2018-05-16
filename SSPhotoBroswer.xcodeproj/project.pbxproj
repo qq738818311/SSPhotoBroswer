@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4121713295BD261352155809 /* libPods-SSPhotoBroswer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55349A2CB8AB61A8E4F7875C /* libPods-SSPhotoBroswer.a */; };
+		F70C26D620ABBD7800F294DF /* SSPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C26D420ABBD7800F294DF /* SSPhotoBrowserCell.m */; };
+		F70C26D720ABBD7800F294DF /* SSPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C26D520ABBD7800F294DF /* SSPhotoBrowserView.m */; };
 		F71FA63120AA7F36006BC33F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F71FA63020AA7F36006BC33F /* AppDelegate.m */; };
 		F71FA63420AA7F36006BC33F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F71FA63320AA7F36006BC33F /* ViewController.m */; };
 		F71FA63720AA7F36006BC33F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71FA63520AA7F36006BC33F /* Main.storyboard */; };
@@ -16,8 +18,6 @@
 		F71FA63F20AA7F36006BC33F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F71FA63E20AA7F36006BC33F /* main.m */; };
 		F71FA64920AA7F37006BC33F /* SSPhotoBroswerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F71FA64820AA7F37006BC33F /* SSPhotoBroswerTests.m */; };
 		F71FA65420AA7F37006BC33F /* SSPhotoBroswerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F71FA65320AA7F37006BC33F /* SSPhotoBroswerUITests.m */; };
-		F757F02C20AA839900CB834B /* SSPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = F757F02B20AA839900CB834B /* SSPhotoBrowserView.m */; };
-		F757F02F20AA845100CB834B /* SSPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F757F02E20AA845100CB834B /* SSPhotoBrowserCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,10 @@
 		409B2E24075BE49CFCB164D1 /* Pods-SSPhotoBroswer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSPhotoBroswer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SSPhotoBroswer/Pods-SSPhotoBroswer.debug.xcconfig"; sourceTree = "<group>"; };
 		4C5491C385E0802365FBB77E /* Pods-SSPhotoBroswer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSPhotoBroswer.release.xcconfig"; path = "Pods/Target Support Files/Pods-SSPhotoBroswer/Pods-SSPhotoBroswer.release.xcconfig"; sourceTree = "<group>"; };
 		55349A2CB8AB61A8E4F7875C /* libPods-SSPhotoBroswer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SSPhotoBroswer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70C26D220ABBD7800F294DF /* SSPhotoBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhotoBrowserCell.h; sourceTree = "<group>"; };
+		F70C26D320ABBD7800F294DF /* SSPhotoBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhotoBrowserView.h; sourceTree = "<group>"; };
+		F70C26D420ABBD7800F294DF /* SSPhotoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhotoBrowserCell.m; sourceTree = "<group>"; };
+		F70C26D520ABBD7800F294DF /* SSPhotoBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhotoBrowserView.m; sourceTree = "<group>"; };
 		F71FA62C20AA7F36006BC33F /* SSPhotoBroswer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSPhotoBroswer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71FA62F20AA7F36006BC33F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F71FA63020AA7F36006BC33F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,10 +61,6 @@
 		F71FA64F20AA7F37006BC33F /* SSPhotoBroswerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSPhotoBroswerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71FA65320AA7F37006BC33F /* SSPhotoBroswerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSPhotoBroswerUITests.m; sourceTree = "<group>"; };
 		F71FA65520AA7F37006BC33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F757F02A20AA839900CB834B /* SSPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSPhotoBrowserView.h; sourceTree = "<group>"; };
-		F757F02B20AA839900CB834B /* SSPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSPhotoBrowserView.m; sourceTree = "<group>"; };
-		F757F02D20AA845100CB834B /* SSPhotoBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSPhotoBrowserCell.h; sourceTree = "<group>"; };
-		F757F02E20AA845100CB834B /* SSPhotoBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSPhotoBrowserCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +97,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F70C26D120ABBD7800F294DF /* SSPhotoBrowserView */ = {
+			isa = PBXGroup;
+			children = (
+				F70C26D220ABBD7800F294DF /* SSPhotoBrowserCell.h */,
+				F70C26D320ABBD7800F294DF /* SSPhotoBrowserView.h */,
+				F70C26D420ABBD7800F294DF /* SSPhotoBrowserCell.m */,
+				F70C26D520ABBD7800F294DF /* SSPhotoBrowserView.m */,
+			);
+			path = SSPhotoBrowserView;
+			sourceTree = "<group>";
+		};
 		F71FA62320AA7F36006BC33F = {
 			isa = PBXGroup;
 			children = (
@@ -122,14 +133,11 @@
 		F71FA62E20AA7F36006BC33F /* SSPhotoBroswer */ = {
 			isa = PBXGroup;
 			children = (
+				F70C26D120ABBD7800F294DF /* SSPhotoBrowserView */,
 				F71FA62F20AA7F36006BC33F /* AppDelegate.h */,
 				F71FA63020AA7F36006BC33F /* AppDelegate.m */,
 				F71FA63220AA7F36006BC33F /* ViewController.h */,
 				F71FA63320AA7F36006BC33F /* ViewController.m */,
-				F757F02A20AA839900CB834B /* SSPhotoBrowserView.h */,
-				F757F02B20AA839900CB834B /* SSPhotoBrowserView.m */,
-				F757F02D20AA845100CB834B /* SSPhotoBrowserCell.h */,
-				F757F02E20AA845100CB834B /* SSPhotoBrowserCell.m */,
 				F71FA63520AA7F36006BC33F /* Main.storyboard */,
 				F71FA63820AA7F36006BC33F /* Assets.xcassets */,
 				F71FA63A20AA7F36006BC33F /* LaunchScreen.storyboard */,
@@ -318,11 +326,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70C26D720ABBD7800F294DF /* SSPhotoBrowserView.m in Sources */,
 				F71FA63420AA7F36006BC33F /* ViewController.m in Sources */,
 				F71FA63F20AA7F36006BC33F /* main.m in Sources */,
-				F757F02C20AA839900CB834B /* SSPhotoBrowserView.m in Sources */,
 				F71FA63120AA7F36006BC33F /* AppDelegate.m in Sources */,
-				F757F02F20AA845100CB834B /* SSPhotoBrowserCell.m in Sources */,
+				F70C26D620ABBD7800F294DF /* SSPhotoBrowserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
