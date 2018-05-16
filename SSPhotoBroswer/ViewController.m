@@ -132,7 +132,8 @@
     
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
+        make.bottom.left.right.equalTo(self.view);
     }];
 }
 
@@ -174,16 +175,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SSPhotoBrowserView *photoView = [[SSPhotoBrowserView alloc]init];
+    SSPhotoBrowserView *photoView = [[SSPhotoBrowserView alloc] initWithBackgroundStyle:SSPhotoBrowserViewBackgroundStyleDark];
+    photoView.replaceView.frame = [self.view convertRect:self.collectionView.frame toView:photoView.window];
     NSMutableArray *listViewFrames = [NSMutableArray new];
     for (int i = 0; i < self.smallUrls.count; i++) {
         CollectionViewCell *cell = (CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        CGRect cell_window_rect = [cell convertRect:cell.imgView.frame toView:self.collectionView];
+        CGRect cell_window_rect = [cell convertRect:cell.imgView.frame toView:photoView.replaceView];
         [listViewFrames addObject:NSStringFromCGRect(cell_window_rect)];
         if (i == indexPath.row) {
             photoView.firstImageFrame = [cell convertRect:cell.imgView.frame toView:cell.window];
         }
     }
+    photoView.replaceView.hidden = YES;
     photoView.imageViewFrames = listViewFrames;
     photoView.fromIndex = indexPath.row;
     photoView.originalUrls = self.smallUrls.count == self.originalUrls.count ? self.originalUrls : self.smallUrls;

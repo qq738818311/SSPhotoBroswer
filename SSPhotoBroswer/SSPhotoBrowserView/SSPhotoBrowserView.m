@@ -11,21 +11,21 @@
 
 @interface SSPhotoBrowserView()<UICollectionViewDelegate, UICollectionViewDataSource, SSPhotoBrowserCellDelegate>
 
+@property (nonatomic, assign) SSPhotoBrowserViewBackgroundStyle backgroundStyle;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, assign) BOOL isFirstLoad;
 
 @end
 
 @implementation SSPhotoBrowserView
-{
-    BOOL isFirstLoad;
-}
 
-- (instancetype)init
+- (instancetype)initWithBackgroundStyle:(SSPhotoBrowserViewBackgroundStyle)backgroundStyle
 {
     if (self = [super init]) {
-        isFirstLoad = YES;
+        self.backgroundStyle = backgroundStyle;
+        self.isFirstLoad = YES;
         [self creatView];
     }
     return self;
@@ -35,8 +35,12 @@
 {
     [self addSubview:self.collectionView];
     self.collectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    [UIView animateWithDuration:0.2 animations:^{
-        self.collectionView.backgroundColor = [UIColor blackColor];
+    [UIView animateWithDuration:0.4 animations:^{
+        if (self.backgroundStyle == SSPhotoBrowserViewBackgroundStyleDark) {
+            self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+        }else{
+            self.collectionView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+        }
     }];
     
     [self.collectionView addSubview:self.pageControl];
@@ -56,8 +60,8 @@
         _collectionView.pagingEnabled = YES;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColor.clearColor;
         [_collectionView registerClass:[SSPhotoBrowserCell class] forCellWithReuseIdentifier:@"SSPhotoBrowserCell"];
-        _collectionView.backgroundColor = [UIColor clearColor];
         self.layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         self.layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         self.layout.minimumLineSpacing = 0;
@@ -72,6 +76,16 @@
         _pageControl = [[UIPageControl alloc]init];
     }
     return _pageControl;
+}
+
+- (UIView *)replaceView
+{
+    if (!_replaceView) {
+        _replaceView = [UIView new];
+        _replaceView.layer.masksToBounds = YES;
+        [self.window addSubview:_replaceView];
+    }
+    return _replaceView;
 }
 
 #pragma mark - Setter
@@ -101,9 +115,9 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     SSPhotoBrowserCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SSPhotoBrowserCell" forIndexPath:indexPath];
-    cell.isFirst = isFirstLoad;
-    if (isFirstLoad) {
-        isFirstLoad = NO;
+    cell.isFirst = self.isFirstLoad;
+    if (self.isFirstLoad) {
+        self.isFirstLoad = NO;
     }
     cell.firstImageFrame = self.firstImageFrame;
     cell.smallURL = self.smallUrls[indexPath.item];
@@ -133,32 +147,28 @@
 - (void)hiddenAction:(SSPhotoBrowserCell *)cell
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    // 找到图片在FatherView上的位置
-    CGRect image_fatherView_rect = CGRectFromString(self.imageViewFrames[indexPath.row]);
-    if (image_fatherView_rect.origin.y != 0) {// 如果在FatherView上显示
-        // 找到Cell图片在FatherView上的位置
-        CGRect cell_image_rect = [cell.scrollView convertRect:cell.imageView.frame toView:self.fatherView];
-        cell.imageView.frame = cell_image_rect;
-        // 将Cell图片添加到FatherView上
-        [self.fatherView addSubview:cell.imageView];
-        self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-    }else{
-        // 找到Cell图片在FatherView上的位置
-        CGRect cell_window_rect = [cell.scrollView convertRect:cell.imageView.frame toView:self.window];
-        cell.imageView.frame = cell_window_rect;
-        // 将Cell图片添加到FatherView上
-        [self.window addSubview:cell.imageView];
-    }
+    // 找到图片在replaceView上的位置
+    CGRect image_replaceView_rect = CGRectFromString(self.imageViewFrames[indexPath.row]);
+    self.replaceView.hidden = NO;
+    [self.window addSubview:self.replaceView];
+    cell.imageView.frame = [cell.scrollView convertRect:cell.imageView.frame toView:self.replaceView];
+    [self.replaceView addSubview:cell.imageView];
+    
     [UIView animateWithDuration:0.4 animations:^{
-        if (image_fatherView_rect.origin.y == 0) {
-            self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-            // 将imageView的位置改变为屏幕中心点
-            cell.imageView.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/2.0, [UIScreen mainScreen].bounds.size.height/2.0, 0, 0);
+        if (image_replaceView_rect.origin.y == 0) {
+            // 将imageView的位置改变为替换View
+            cell.imageView.frame = CGRectMake(self.replaceView.bounds.size.width/2.0, self.replaceView.bounds.size.height/2.0, 0, 0);
         }else{
             // 改变Cell图片的位置到FatherView上图片的位置
-            cell.imageView.frame = image_fatherView_rect;
+            cell.imageView.frame = image_replaceView_rect;
+        }
+        if (self.backgroundStyle == SSPhotoBrowserViewBackgroundStyleDark) {
+            self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        }else{
+            self.collectionView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];
         }
     } completion:^(BOOL finished) {
+        self.replaceView.hidden = YES;
         [cell.imageView removeFromSuperview];
         [self removeFromSuperview];
     }];
@@ -166,7 +176,11 @@
 
 - (void)backgroundAlpha:(CGFloat)alpha
 {
-    self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha];
+    if (self.backgroundStyle == SSPhotoBrowserViewBackgroundStyleDark) {
+        self.collectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha];
+    }else{
+        self.collectionView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:alpha];
+    }
     self.pageControl.alpha = alpha == 1 ?:0;
 }
 
@@ -176,6 +190,11 @@
 {
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+}
+
+- (void)dealloc
+{
+    
 }
 
 @end
