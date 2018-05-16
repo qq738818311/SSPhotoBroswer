@@ -100,10 +100,10 @@
 		F70C26D120ABBD7800F294DF /* SSPhotoBrowserView */ = {
 			isa = PBXGroup;
 			children = (
-				F70C26D220ABBD7800F294DF /* SSPhotoBrowserCell.h */,
 				F70C26D320ABBD7800F294DF /* SSPhotoBrowserView.h */,
-				F70C26D420ABBD7800F294DF /* SSPhotoBrowserCell.m */,
 				F70C26D520ABBD7800F294DF /* SSPhotoBrowserView.m */,
+				F70C26D220ABBD7800F294DF /* SSPhotoBrowserCell.h */,
+				F70C26D420ABBD7800F294DF /* SSPhotoBrowserCell.m */,
 			);
 			path = SSPhotoBrowserView;
 			sourceTree = "<group>";
