@@ -26,8 +26,8 @@ typedef NS_ENUM(NSInteger, SSPhotoBrowserViewBackgroundStyle) {
 @property (nonatomic, weak) UIView *fatherView;
 @property (nonatomic, strong) UIView *replaceView;
 
+@property (nonatomic, strong) UIImage *placeholderImage;
 @property (nonatomic, strong) NSArray *originalUrls;
-
 @property (nonatomic, strong) NSArray *smallUrls;
 
 - (instancetype)initWithBackgroundStyle:(SSPhotoBrowserViewBackgroundStyle)backgroundStyle;

@@ -192,6 +192,7 @@
     photoView.originalUrls = self.smallUrls.count == self.originalUrls.count ? self.originalUrls : self.smallUrls;
     photoView.smallUrls = self.smallUrls;
     photoView.fatherView = self.collectionView;
+    photoView.placeholderImage = [UIImage imageNamed:@"Default"];
     [photoView show];
     
 }

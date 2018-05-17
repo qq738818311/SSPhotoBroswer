@@ -140,7 +140,7 @@
     }
     
     //下载图片
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:picURL] placeholderImage:[cache imageFromDiskCacheForKey:key] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:picURL] placeholderImage:self.placeholderImage ? : [cache imageFromDiskCacheForKey:key] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.hud.label.text = [NSString stringWithFormat:@"%.f%%",(((float)receivedSize/(float)expectedSize) * 100.f) > 0 ?(float)receivedSize/(float)expectedSize * 100:0.f];
             self.hud.progress = (float)receivedSize/(float)expectedSize;
@@ -148,7 +148,7 @@
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         [self.hud hideAnimated:NO];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateImageViewWithImage:image];
+            [self updateImageViewWithImage:image ? : self.placeholderImage];
         });
     }];
 }

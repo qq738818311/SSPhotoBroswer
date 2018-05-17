@@ -29,8 +29,8 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 
+@property (nonatomic, strong) UIImage *placeholderImage;
 @property (nonatomic, strong) NSString *smallURL;
-
 @property (nonatomic, copy) NSString *picURL;
 
 @property (nonatomic, weak) id<SSPhotoBrowserCellDelegate> delegate;

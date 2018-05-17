@@ -120,6 +120,7 @@
         self.isFirstLoad = NO;
     }
     cell.firstImageFrame = self.firstImageFrame;
+    cell.placeholderImage = self.placeholderImage;
     cell.smallURL = self.smallUrls[indexPath.item];
     cell.picURL = self.originalUrls[indexPath.item];
     cell.delegate = self;
