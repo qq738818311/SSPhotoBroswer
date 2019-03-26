@@ -135,12 +135,12 @@
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSString* key = [manager cacheKeyForURL:[NSURL URLWithString:self.smallURL]];
     SDImageCache* cache = [SDImageCache sharedImageCache];
-    if ([[cache imageFromDiskCacheForKey:key] isKindOfClass:[UIImage class]]) {
-        [self updateImageViewWithImage:[cache imageFromDiskCacheForKey:key]];
+    if ([[cache imageFromCacheForKey:key] isKindOfClass:[UIImage class]]) {
+        [self updateImageViewWithImage:[cache imageFromCacheForKey:key]];
     }
     
     //下载图片
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:picURL] placeholderImage:self.placeholderImage ? : [cache imageFromDiskCacheForKey:key] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:picURL] placeholderImage:self.placeholderImage ? : [cache imageFromCacheForKey:key] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.hud.label.text = [NSString stringWithFormat:@"%.f%%",(((float)receivedSize/(float)expectedSize) * 100.f) > 0 ?(float)receivedSize/(float)expectedSize * 100:0.f];
             self.hud.progress = (float)receivedSize/(float)expectedSize;
